@@ -1,0 +1,107 @@
+[
+  {
+    "id": "TKT-044",
+    "ticket_text": "Search filters on the product catalog page reset every time I navigate back from an item view.",
+    "category": "Technical",
+    "order_id": null,
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-001",
+    "ticket_text": "My package for order ORD-1001 was marked as delivered two hours ago, but nothing arrived at my doorstep and it contains urgent medication.",
+    "category": "Shipping",
+    "order_id": "ORD-1001",
+    "priority": "High"
+  },
+  {
+    "id": "TKT-057",
+    "ticket_text": "Thank you so much to your support team for resolving my issue yesterday, everything works great now!",
+    "category": "Other",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-021",
+    "ticket_text": "What is your general return and refund window for seasonal clothing items?",
+    "category": "Refund",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-055",
+    "ticket_text": "Can you merge my two duplicate customer loyalty accounts so my reward points are combined?",
+    "category": "Other",
+    "order_id": null,
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-037",
+    "ticket_text": "Critical issue: our entire team is locked out of the admin dashboard with a 500 Internal Server Error and production operations are halted!",
+    "category": "Technical",
+    "order_id": null,
+    "priority": "High"
+  },
+  {
+    "id": "TKT-013",
+    "ticket_text": "I returned the defective laptop from order ORD-2001 over three weeks ago, warehouse confirmed receipt, yet my $1,200 refund is still missing!",
+    "category": "Refund",
+    "order_id": "ORD-2001",
+    "priority": "High"
+  },
+  {
+    "id": "TKT-046",
+    "ticket_text": "Which web browsers and operating system versions are officially supported by your desktop client?",
+    "category": "Technical",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-052",
+    "ticket_text": "A safety recall alert was mentioned in the news for the battery model in my order ORD-5004; please tell me urgently if my unit is affected.",
+    "category": "Other",
+    "order_id": "ORD-5004",
+    "priority": "High"
+  },
+  {
+    "id": "TKT-031",
+    "ticket_text": "Can I switch the payment method on my pending subscription renewal from my expired card to a new Mastercard?",
+    "category": "Payment",
+    "order_id": null,
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-025",
+    "ticket_text": "Emergency! My credit card was charged three times for order ORD-3001 and my bank account is now overdrawn.",
+    "category": "Payment",
+    "order_id": "ORD-3001",
+    "priority": "High"
+  },
+  {
+    "id": "TKT-018",
+    "ticket_text": "I would like to return two items from order ORD-2006 and get a refund instead of store credit. Please send me the return label.",
+    "category": "Refund",
+    "order_id": "ORD-2006",
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-006",
+    "ticket_text": "I noticed a typo in my street number for order ORD-1006. Could you update the delivery address before it ships out?",
+    "category": "Shipping",
+    "order_id": "ORD-1006",
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-012",
+    "ticket_text": "Could you confirm whether order ORD-1012 will require a signature upon delivery next week?",
+    "category": "Shipping",
+    "order_id": "ORD-1012",
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-036",
+    "ticket_text": "When will the pending authorization hold on my card for order ORD-3012 drop off?",
+    "category": "Payment",
+    "order_id": "ORD-3012",
+    "priority": "Low"
+  }
+]

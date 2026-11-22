@@ -1,0 +1,290 @@
+{
+  "model": "ollama_chat/qwen2.5:1.5b",
+  "optimizers_evaluated": [
+    "LabeledFewShot (5 class-balanced demos)",
+    "BootstrapFewShot (15 stratified train samples)"
+  ],
+  "optimization_rationale": "Added explicit semantic definitions in TicketClassificationSignature and evaluated class-balanced few-shot selection (1 demo per category) against BootstrapFewShot on Validation Set to eliminate majority-class bias toward 'Technical'.",
+  "train_samples_used": 30,
+  "validation_samples_used": 15,
+  "test_set_untouched": true,
+  "selected_best_candidate": "ClassBalanced_FewShot_5",
+  "selected_hyperparameters": {
+    "optimizer": "LabeledFewShot",
+    "k": 5,
+    "strict_class_balance": "1 demo per category (Shipping, Refund, Payment, Technical, Other)"
+  },
+  "selected_validation_metrics": {
+    "total_samples": 15,
+    "exact_match_count": 5,
+    "exact_match_accuracy": 0.3333,
+    "category_metrics": {
+      "accuracy": 0.7333,
+      "macro_precision": 0.8333,
+      "macro_recall": 0.7333,
+      "macro_f1": 0.7467,
+      "per_class": {
+        "Shipping": {
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "support": 3
+        },
+        "Refund": {
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "support": 3
+        },
+        "Payment": {
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "support": 3
+        },
+        "Technical": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6667,
+          "support": 3
+        },
+        "Other": {
+          "precision": 0.6667,
+          "recall": 0.6667,
+          "f1": 0.6667,
+          "support": 3
+        }
+      }
+    },
+    "priority_metrics": {
+      "accuracy": 0.5333,
+      "macro_precision": 0.6333,
+      "macro_recall": 0.5333,
+      "macro_f1": 0.523,
+      "per_class": {
+        "High": {
+          "precision": 1.0,
+          "recall": 0.6,
+          "f1": 0.75,
+          "support": 5
+        },
+        "Medium": {
+          "precision": 0.5,
+          "recall": 0.2,
+          "f1": 0.2857,
+          "support": 5
+        },
+        "Low": {
+          "precision": 0.4,
+          "recall": 0.8,
+          "f1": 0.5333,
+          "support": 5
+        }
+      }
+    },
+    "order_id_metrics": {
+      "overall_accuracy": 0.6667,
+      "present_only_count": 8,
+      "present_only_exact_matches": 3,
+      "present_only_accuracy": 0.375,
+      "null_only_count": 7,
+      "null_only_specificity": 1.0,
+      "entity_precision": 1.0,
+      "entity_recall": 0.375,
+      "entity_f1": 0.5455
+    },
+    "runtime_sec": 128.32,
+    "avg_latency_per_ticket_sec": 8.555
+  },
+  "all_validation_experiments": [
+    {
+      "candidate_name": "ClassBalanced_FewShot_5",
+      "hyperparameters": {
+        "optimizer": "LabeledFewShot",
+        "k": 5,
+        "strict_class_balance": "1 demo per category (Shipping, Refund, Payment, Technical, Other)"
+      },
+      "compile_runtime_sec": 0.003,
+      "active_demos_count": 5,
+      "validation_composite_score": 0.5064,
+      "validation_metrics": {
+        "total_samples": 15,
+        "exact_match_count": 5,
+        "exact_match_accuracy": 0.3333,
+        "category_metrics": {
+          "accuracy": 0.7333,
+          "macro_precision": 0.8333,
+          "macro_recall": 0.7333,
+          "macro_f1": 0.7467,
+          "per_class": {
+            "Shipping": {
+              "precision": 1.0,
+              "recall": 0.6667,
+              "f1": 0.8,
+              "support": 3
+            },
+            "Refund": {
+              "precision": 1.0,
+              "recall": 0.6667,
+              "f1": 0.8,
+              "support": 3
+            },
+            "Payment": {
+              "precision": 1.0,
+              "recall": 0.6667,
+              "f1": 0.8,
+              "support": 3
+            },
+            "Technical": {
+              "precision": 0.5,
+              "recall": 1.0,
+              "f1": 0.6667,
+              "support": 3
+            },
+            "Other": {
+              "precision": 0.6667,
+              "recall": 0.6667,
+              "f1": 0.6667,
+              "support": 3
+            }
+          }
+        },
+        "priority_metrics": {
+          "accuracy": 0.5333,
+          "macro_precision": 0.6333,
+          "macro_recall": 0.5333,
+          "macro_f1": 0.523,
+          "per_class": {
+            "High": {
+              "precision": 1.0,
+              "recall": 0.6,
+              "f1": 0.75,
+              "support": 5
+            },
+            "Medium": {
+              "precision": 0.5,
+              "recall": 0.2,
+              "f1": 0.2857,
+              "support": 5
+            },
+            "Low": {
+              "precision": 0.4,
+              "recall": 0.8,
+              "f1": 0.5333,
+              "support": 5
+            }
+          }
+        },
+        "order_id_metrics": {
+          "overall_accuracy": 0.6667,
+          "present_only_count": 8,
+          "present_only_exact_matches": 3,
+          "present_only_accuracy": 0.375,
+          "null_only_count": 7,
+          "null_only_specificity": 1.0,
+          "entity_precision": 1.0,
+          "entity_recall": 0.375,
+          "entity_f1": 0.5455
+        },
+        "runtime_sec": 128.32,
+        "avg_latency_per_ticket_sec": 8.555
+      }
+    },
+    {
+      "candidate_name": "BootstrapFewShot_Stratified15",
+      "hyperparameters": {
+        "optimizer": "BootstrapFewShot",
+        "max_bootstrapped_demos": 3,
+        "max_labeled_demos": 5,
+        "max_rounds": 1,
+        "trainset_subset": "15 stratified examples (3 per category)"
+      },
+      "compile_runtime_sec": 151.938,
+      "active_demos_count": 5,
+      "validation_composite_score": 0.4868,
+      "validation_metrics": {
+        "total_samples": 15,
+        "exact_match_count": 4,
+        "exact_match_accuracy": 0.2667,
+        "category_metrics": {
+          "accuracy": 0.6,
+          "macro_precision": 0.8083,
+          "macro_recall": 0.6,
+          "macro_f1": 0.6024,
+          "per_class": {
+            "Shipping": {
+              "precision": 1.0,
+              "recall": 0.3333,
+              "f1": 0.5,
+              "support": 3
+            },
+            "Refund": {
+              "precision": 1.0,
+              "recall": 0.6667,
+              "f1": 0.8,
+              "support": 3
+            },
+            "Payment": {
+              "precision": 1.0,
+              "recall": 0.3333,
+              "f1": 0.5,
+              "support": 3
+            },
+            "Technical": {
+              "precision": 0.375,
+              "recall": 1.0,
+              "f1": 0.5455,
+              "support": 3
+            },
+            "Other": {
+              "precision": 0.6667,
+              "recall": 0.6667,
+              "f1": 0.6667,
+              "support": 3
+            }
+          }
+        },
+        "priority_metrics": {
+          "accuracy": 0.6,
+          "macro_precision": 0.4848,
+          "macro_recall": 0.6,
+          "macro_f1": 0.5046,
+          "per_class": {
+            "High": {
+              "precision": 1.0,
+              "recall": 0.8,
+              "f1": 0.8889,
+              "support": 5
+            },
+            "Medium": {
+              "precision": 0.0,
+              "recall": 0.0,
+              "f1": 0.0,
+              "support": 5
+            },
+            "Low": {
+              "precision": 0.4545,
+              "recall": 1.0,
+              "f1": 0.625,
+              "support": 5
+            }
+          }
+        },
+        "order_id_metrics": {
+          "overall_accuracy": 0.8667,
+          "present_only_count": 8,
+          "present_only_exact_matches": 6,
+          "present_only_accuracy": 0.75,
+          "null_only_count": 7,
+          "null_only_specificity": 1.0,
+          "entity_precision": 1.0,
+          "entity_recall": 0.75,
+          "entity_f1": 0.8571
+        },
+        "runtime_sec": 128.978,
+        "avg_latency_per_ticket_sec": 8.599
+      }
+    }
+  ],
+  "saved_artifact": "artifacts\\optimized_ticket_classifier.json"
+}

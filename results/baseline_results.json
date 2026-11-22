@@ -1,0 +1,538 @@
+{
+  "model": "ollama_chat/qwen2.5:1.5b",
+  "method": "Baseline (Uncompiled ChainOfThought)",
+  "validation": {
+    "split": "validation",
+    "metrics": {
+      "total_samples": 15,
+      "exact_match_count": 2,
+      "exact_match_accuracy": 0.1333,
+      "category_metrics": {
+        "accuracy": 0.3333,
+        "macro_precision": 0.16,
+        "macro_recall": 0.3333,
+        "macro_f1": 0.2066,
+        "per_class": {
+          "Shipping": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3
+          },
+          "Refund": {
+            "precision": 0.5,
+            "recall": 0.6667,
+            "f1": 0.5714,
+            "support": 3
+          },
+          "Payment": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3
+          },
+          "Technical": {
+            "precision": 0.3,
+            "recall": 1.0,
+            "f1": 0.4615,
+            "support": 3
+          },
+          "Other": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 3
+          }
+        }
+      },
+      "priority_metrics": {
+        "accuracy": 0.6667,
+        "macro_precision": 0.5,
+        "macro_recall": 0.6667,
+        "macro_f1": 0.5556,
+        "per_class": {
+          "High": {
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1": 1.0,
+            "support": 5
+          },
+          "Medium": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 5
+          },
+          "Low": {
+            "precision": 0.5,
+            "recall": 1.0,
+            "f1": 0.6667,
+            "support": 5
+          }
+        }
+      },
+      "order_id_metrics": {
+        "overall_accuracy": 0.8,
+        "present_only_count": 8,
+        "present_only_exact_matches": 8,
+        "present_only_accuracy": 1.0,
+        "null_only_count": 7,
+        "null_only_specificity": 0.5714,
+        "entity_precision": 0.7273,
+        "entity_recall": 1.0,
+        "entity_f1": 0.8421
+      },
+      "runtime_sec": 111.263,
+      "avg_latency_per_ticket_sec": 7.418
+    },
+    "predictions": [
+      {
+        "id": "TKT-044",
+        "ticket_text": "Search filters on the product catalog page reset every time I navigate back from an item view.",
+        "true_category": "Technical",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 14.359,
+        "error": null
+      },
+      {
+        "id": "TKT-001",
+        "ticket_text": "My package for order ORD-1001 was marked as delivered two hours ago, but nothing arrived at my doorstep and it contains urgent medication.",
+        "true_category": "Shipping",
+        "pred_category": "Refund",
+        "true_order_id": "ORD-1001",
+        "pred_order_id": "ORD-1001",
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 7.327,
+        "error": null
+      },
+      {
+        "id": "TKT-057",
+        "ticket_text": "Thank you so much to your support team for resolving my issue yesterday, everything works great now!",
+        "true_category": "Other",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 5.888,
+        "error": null
+      },
+      {
+        "id": "TKT-021",
+        "ticket_text": "What is your general return and refund window for seasonal clothing items?",
+        "true_category": "Refund",
+        "pred_category": "Other",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 7.95,
+        "error": null
+      },
+      {
+        "id": "TKT-055",
+        "ticket_text": "Can you merge my two duplicate customer loyalty accounts so my reward points are combined?",
+        "true_category": "Other",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": "ORD-XXXX",
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 5.996,
+        "error": null
+      },
+      {
+        "id": "TKT-037",
+        "ticket_text": "Critical issue: our entire team is locked out of the admin dashboard with a 500 Internal Server Error and production operations are halted!",
+        "true_category": "Technical",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": "ORD-XXXX",
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 7.766,
+        "error": null
+      },
+      {
+        "id": "TKT-013",
+        "ticket_text": "I returned the defective laptop from order ORD-2001 over three weeks ago, warehouse confirmed receipt, yet my $1,200 refund is still missing!",
+        "true_category": "Refund",
+        "pred_category": "Refund",
+        "true_order_id": "ORD-2001",
+        "pred_order_id": "ORD-2001",
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 8.683,
+        "error": null
+      },
+      {
+        "id": "TKT-046",
+        "ticket_text": "Which web browsers and operating system versions are officially supported by your desktop client?",
+        "true_category": "Technical",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 5.734,
+        "error": null
+      },
+      {
+        "id": "TKT-052",
+        "ticket_text": "A safety recall alert was mentioned in the news for the battery model in my order ORD-5004; please tell me urgently if my unit is affected.",
+        "true_category": "Other",
+        "pred_category": "Technical",
+        "true_order_id": "ORD-5004",
+        "pred_order_id": "ORD-5004",
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 7.298,
+        "error": null
+      },
+      {
+        "id": "TKT-031",
+        "ticket_text": "Can I switch the payment method on my pending subscription renewal from my expired card to a new Mastercard?",
+        "true_category": "Payment",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": "ORD-XXXX",
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 7.166,
+        "error": null
+      },
+      {
+        "id": "TKT-025",
+        "ticket_text": "Emergency! My credit card was charged three times for order ORD-3001 and my bank account is now overdrawn.",
+        "true_category": "Payment",
+        "pred_category": "Refund",
+        "true_order_id": "ORD-3001",
+        "pred_order_id": "ORD-3001",
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 5.885,
+        "error": null
+      },
+      {
+        "id": "TKT-018",
+        "ticket_text": "I would like to return two items from order ORD-2006 and get a refund instead of store credit. Please send me the return label.",
+        "true_category": "Refund",
+        "pred_category": "Refund",
+        "true_order_id": "ORD-2006",
+        "pred_order_id": "ORD-2006",
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 6.62,
+        "error": null
+      },
+      {
+        "id": "TKT-006",
+        "ticket_text": "I noticed a typo in my street number for order ORD-1006. Could you update the delivery address before it ships out?",
+        "true_category": "Shipping",
+        "pred_category": "Technical",
+        "true_order_id": "ORD-1006",
+        "pred_order_id": "ORD-1006",
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 6.912,
+        "error": null
+      },
+      {
+        "id": "TKT-012",
+        "ticket_text": "Could you confirm whether order ORD-1012 will require a signature upon delivery next week?",
+        "true_category": "Shipping",
+        "pred_category": "Technical",
+        "true_order_id": "ORD-1012",
+        "pred_order_id": "ORD-1012",
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 6.659,
+        "error": null
+      },
+      {
+        "id": "TKT-036",
+        "ticket_text": "When will the pending authorization hold on my card for order ORD-3012 drop off?",
+        "true_category": "Payment",
+        "pred_category": "Technical",
+        "true_order_id": "ORD-3012",
+        "pred_order_id": "ORD-3012",
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 6.999,
+        "error": null
+      }
+    ]
+  },
+  "test": {
+    "split": "test",
+    "metrics": {
+      "total_samples": 15,
+      "exact_match_count": 3,
+      "exact_match_accuracy": 0.2,
+      "category_metrics": {
+        "accuracy": 0.6667,
+        "macro_precision": 0.819,
+        "macro_recall": 0.6667,
+        "macro_f1": 0.6733,
+        "per_class": {
+          "Shipping": {
+            "precision": 1.0,
+            "recall": 0.6667,
+            "f1": 0.8,
+            "support": 3
+          },
+          "Refund": {
+            "precision": 1.0,
+            "recall": 0.6667,
+            "f1": 0.8,
+            "support": 3
+          },
+          "Payment": {
+            "precision": 1.0,
+            "recall": 0.3333,
+            "f1": 0.5,
+            "support": 3
+          },
+          "Technical": {
+            "precision": 0.4286,
+            "recall": 1.0,
+            "f1": 0.6,
+            "support": 3
+          },
+          "Other": {
+            "precision": 0.6667,
+            "recall": 0.6667,
+            "f1": 0.6667,
+            "support": 3
+          }
+        }
+      },
+      "priority_metrics": {
+        "accuracy": 0.5333,
+        "macro_precision": 0.4015,
+        "macro_recall": 0.5333,
+        "macro_f1": 0.4306,
+        "per_class": {
+          "High": {
+            "precision": 0.75,
+            "recall": 0.6,
+            "f1": 0.6667,
+            "support": 5
+          },
+          "Medium": {
+            "precision": 0.0,
+            "recall": 0.0,
+            "f1": 0.0,
+            "support": 5
+          },
+          "Low": {
+            "precision": 0.4545,
+            "recall": 1.0,
+            "f1": 0.625,
+            "support": 5
+          }
+        }
+      },
+      "order_id_metrics": {
+        "overall_accuracy": 0.8667,
+        "present_only_count": 7,
+        "present_only_exact_matches": 7,
+        "present_only_accuracy": 1.0,
+        "null_only_count": 8,
+        "null_only_specificity": 0.75,
+        "entity_precision": 0.7778,
+        "entity_recall": 1.0,
+        "entity_f1": 0.875
+      },
+      "runtime_sec": 107.465,
+      "avg_latency_per_ticket_sec": 7.164
+    },
+    "predictions": [
+      {
+        "id": "TKT-049",
+        "ticket_text": "I suspect someone compromised my account and changed my registered email address. Please lock my profile immediately for security!",
+        "true_category": "Other",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 5.857,
+        "error": null
+      },
+      {
+        "id": "TKT-009",
+        "ticket_text": "Do you offer international shipping to Canada and Tunisia for standard electronics orders?",
+        "true_category": "Shipping",
+        "pred_category": "Shipping",
+        "true_order_id": null,
+        "pred_order_id": "ORD-12345",
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 14.825,
+        "error": null
+      },
+      {
+        "id": "TKT-039",
+        "ticket_text": "Two-factor authentication SMS codes are not arriving at all, so I am completely locked out of my account.",
+        "true_category": "Technical",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "High",
+        "pred_priority": "Low",
+        "latency_sec": 5.471,
+        "error": null
+      },
+      {
+        "id": "TKT-033",
+        "ticket_text": "Do you accept Apple Pay, Google Pay, or bank wire transfers for online purchases?",
+        "true_category": "Payment",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 6.035,
+        "error": null
+      },
+      {
+        "id": "TKT-020",
+        "ticket_text": "Please cancel order ORD-2008 before dispatch and refund the full purchase amount to my PayPal account.",
+        "true_category": "Refund",
+        "pred_category": "Refund",
+        "true_order_id": "ORD-2008",
+        "pred_order_id": "ORD-2008",
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 7.093,
+        "error": null
+      },
+      {
+        "id": "TKT-053",
+        "ticket_text": "How can our company apply to become an authorized wholesale distributor for your brand?",
+        "true_category": "Other",
+        "pred_category": "Other",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 5.547,
+        "error": null
+      },
+      {
+        "id": "TKT-058",
+        "ticket_text": "What are your customer service opening hours during public holidays?",
+        "true_category": "Other",
+        "pred_category": "Other",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 5.788,
+        "error": null
+      },
+      {
+        "id": "TKT-045",
+        "ticket_text": "Dark mode text on the settings page has slightly low contrast on Safari.",
+        "true_category": "Technical",
+        "pred_category": "Technical",
+        "true_order_id": null,
+        "pred_order_id": "ORD-XXXX",
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 6.864,
+        "error": null
+      },
+      {
+        "id": "TKT-016",
+        "ticket_text": "My return request for order ORD-2004 was wrongly rejected even though the item is unopened. Please escalate my refund immediately.",
+        "true_category": "Refund",
+        "pred_category": "Refund",
+        "true_order_id": "ORD-2004",
+        "pred_order_id": "ORD-2004",
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 6.008,
+        "error": null
+      },
+      {
+        "id": "TKT-023",
+        "ticket_text": "Are original shipping costs refundable if I decide to return an unwanted item?",
+        "true_category": "Refund",
+        "pred_category": "Other",
+        "true_order_id": null,
+        "pred_order_id": null,
+        "true_priority": "Low",
+        "pred_priority": "Low",
+        "latency_sec": 6.49,
+        "error": null
+      },
+      {
+        "id": "TKT-043",
+        "ticket_text": "I cannot download the firmware zip file included with my hardware purchase in order ORD-4007; the download stops at 50%.",
+        "true_category": "Technical",
+        "pred_category": "Technical",
+        "true_order_id": "ORD-4007",
+        "pred_order_id": "ORD-4007",
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 7.882,
+        "error": null
+      },
+      {
+        "id": "TKT-029",
+        "ticket_text": "My Visa card keeps getting declined at checkout with error code 402 when I try to pay for order ORD-3005.",
+        "true_category": "Payment",
+        "pred_category": "Technical",
+        "true_order_id": "ORD-3005",
+        "pred_order_id": "ORD-3005",
+        "true_priority": "Medium",
+        "pred_priority": "High",
+        "latency_sec": 8.35,
+        "error": null
+      },
+      {
+        "id": "TKT-005",
+        "ticket_text": "Can you check why the tracking status for order ORD-1005 has not updated since leaving the sorting facility three days ago?",
+        "true_category": "Shipping",
+        "pred_category": "Technical",
+        "true_order_id": "ORD-1005",
+        "pred_order_id": "ORD-1005",
+        "true_priority": "Medium",
+        "pred_priority": "Low",
+        "latency_sec": 6.817,
+        "error": null
+      },
+      {
+        "id": "TKT-002",
+        "ticket_text": "Order ORD-1002 is stuck in customs clearance for 10 days and I need these presentation materials before tomorrow morning's conference.",
+        "true_category": "Shipping",
+        "pred_category": "Shipping",
+        "true_order_id": "ORD-1002",
+        "pred_order_id": "ORD-1002",
+        "true_priority": "High",
+        "pred_priority": "Low",
+        "latency_sec": 7.163,
+        "error": null
+      },
+      {
+        "id": "TKT-028",
+        "ticket_text": "Our corporate procurement payment for order ORD-3004 is blocked at gateway verification and the supplier deadline expires in one hour.",
+        "true_category": "Payment",
+        "pred_category": "Payment",
+        "true_order_id": "ORD-3004",
+        "pred_order_id": "ORD-3004",
+        "true_priority": "High",
+        "pred_priority": "High",
+        "latency_sec": 7.27,
+        "error": null
+      }
+    ]
+  }
+}

@@ -1,0 +1,63 @@
+﻿{
+  "random_seed": 42,
+  "split_ratio": "50% Train / 25% Validation / 25% Test",
+  "stratification_keys": [
+    "category",
+    "priority"
+  ],
+  "data_leakage_verified": true,
+  "statistical_note": "Each split is strictly balanced across all 5 categories and 3 priorities. Because the test set contains 15 samples (each sample = 6.67%), metrics serve as controlled prototype benchmarks rather than large-scale statistical guarantees.",
+  "splits": {
+    "train": {
+      "count": 30,
+      "categories": {
+        "Other": 6,
+        "Payment": 6,
+        "Refund": 6,
+        "Shipping": 6,
+        "Technical": 6
+      },
+      "priorities": {
+        "High": 10,
+        "Low": 10,
+        "Medium": 10
+      },
+      "with_order_id": 18,
+      "without_order_id": 12
+    },
+    "validation": {
+      "count": 15,
+      "categories": {
+        "Other": 3,
+        "Payment": 3,
+        "Refund": 3,
+        "Shipping": 3,
+        "Technical": 3
+      },
+      "priorities": {
+        "High": 5,
+        "Low": 5,
+        "Medium": 5
+      },
+      "with_order_id": 8,
+      "without_order_id": 7
+    },
+    "test": {
+      "count": 15,
+      "categories": {
+        "Other": 3,
+        "Payment": 3,
+        "Refund": 3,
+        "Shipping": 3,
+        "Technical": 3
+      },
+      "priorities": {
+        "High": 5,
+        "Low": 5,
+        "Medium": 5
+      },
+      "with_order_id": 7,
+      "without_order_id": 8
+    }
+  }
+}

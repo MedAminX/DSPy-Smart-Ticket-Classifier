@@ -1,0 +1,41 @@
+{
+  "source_file": "data\\raw_tickets.json",
+  "clean_file": "data\\clean_tickets.json",
+  "total_raw_tickets": 60,
+  "total_clean_tickets": 60,
+  "issues_found": 0,
+  "issues_details": [],
+  "category_distribution": {
+    "Shipping": 12,
+    "Refund": 12,
+    "Payment": 12,
+    "Technical": 12,
+    "Other": 12
+  },
+  "priority_distribution": {
+    "High": 20,
+    "Medium": 20,
+    "Low": 20
+  },
+  "category_priority_matrix": {
+    "Other | High": 4,
+    "Other | Medium": 4,
+    "Other | Low": 4,
+    "Payment | High": 4,
+    "Payment | Medium": 4,
+    "Payment | Low": 4,
+    "Refund | High": 4,
+    "Refund | Medium": 4,
+    "Refund | Low": 4,
+    "Shipping | High": 4,
+    "Shipping | Medium": 4,
+    "Shipping | Low": 4,
+    "Technical | High": 4,
+    "Technical | Medium": 4,
+    "Technical | Low": 4
+  },
+  "order_id_distribution": {
+    "with_order_id": 33,
+    "without_order_id_null": 27
+  }
+}

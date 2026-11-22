@@ -1,0 +1,107 @@
+[
+  {
+    "id": "TKT-049",
+    "ticket_text": "I suspect someone compromised my account and changed my registered email address. Please lock my profile immediately for security!",
+    "category": "Other",
+    "order_id": null,
+    "priority": "High"
+  },
+  {
+    "id": "TKT-009",
+    "ticket_text": "Do you offer international shipping to Canada and Tunisia for standard electronics orders?",
+    "category": "Shipping",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-039",
+    "ticket_text": "Two-factor authentication SMS codes are not arriving at all, so I am completely locked out of my account.",
+    "category": "Technical",
+    "order_id": null,
+    "priority": "High"
+  },
+  {
+    "id": "TKT-033",
+    "ticket_text": "Do you accept Apple Pay, Google Pay, or bank wire transfers for online purchases?",
+    "category": "Payment",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-020",
+    "ticket_text": "Please cancel order ORD-2008 before dispatch and refund the full purchase amount to my PayPal account.",
+    "category": "Refund",
+    "order_id": "ORD-2008",
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-053",
+    "ticket_text": "How can our company apply to become an authorized wholesale distributor for your brand?",
+    "category": "Other",
+    "order_id": null,
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-058",
+    "ticket_text": "What are your customer service opening hours during public holidays?",
+    "category": "Other",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-045",
+    "ticket_text": "Dark mode text on the settings page has slightly low contrast on Safari.",
+    "category": "Technical",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-016",
+    "ticket_text": "My return request for order ORD-2004 was wrongly rejected even though the item is unopened. Please escalate my refund immediately.",
+    "category": "Refund",
+    "order_id": "ORD-2004",
+    "priority": "High"
+  },
+  {
+    "id": "TKT-023",
+    "ticket_text": "Are original shipping costs refundable if I decide to return an unwanted item?",
+    "category": "Refund",
+    "order_id": null,
+    "priority": "Low"
+  },
+  {
+    "id": "TKT-043",
+    "ticket_text": "I cannot download the firmware zip file included with my hardware purchase in order ORD-4007; the download stops at 50%.",
+    "category": "Technical",
+    "order_id": "ORD-4007",
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-029",
+    "ticket_text": "My Visa card keeps getting declined at checkout with error code 402 when I try to pay for order ORD-3005.",
+    "category": "Payment",
+    "order_id": "ORD-3005",
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-005",
+    "ticket_text": "Can you check why the tracking status for order ORD-1005 has not updated since leaving the sorting facility three days ago?",
+    "category": "Shipping",
+    "order_id": "ORD-1005",
+    "priority": "Medium"
+  },
+  {
+    "id": "TKT-002",
+    "ticket_text": "Order ORD-1002 is stuck in customs clearance for 10 days and I need these presentation materials before tomorrow morning's conference.",
+    "category": "Shipping",
+    "order_id": "ORD-1002",
+    "priority": "High"
+  },
+  {
+    "id": "TKT-028",
+    "ticket_text": "Our corporate procurement payment for order ORD-3004 is blocked at gateway verification and the supplier deadline expires in one hour.",
+    "category": "Payment",
+    "order_id": "ORD-3004",
+    "priority": "High"
+  }
+]

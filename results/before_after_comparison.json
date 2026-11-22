@@ -1,0 +1,435 @@
+{
+  "evaluation_dataset": "data/test.json",
+  "test_samples": 15,
+  "model": "ollama_chat/qwen2.5:1.5b",
+  "selected_candidate": "ClassBalanced_FewShot_5",
+  "loaded_demos_count": 5,
+  "side_by_side_comparison": {
+    "exact_match_accuracy": {
+      "baseline": 0.2,
+      "optimized": 0.4667,
+      "delta": 0.2667
+    },
+    "category_accuracy": {
+      "baseline": 0.6667,
+      "optimized": 0.8667,
+      "delta": 0.2
+    },
+    "category_macro_precision": {
+      "baseline": 0.819,
+      "optimized": 0.9,
+      "delta": 0.081
+    },
+    "category_macro_recall": {
+      "baseline": 0.6667,
+      "optimized": 0.8667,
+      "delta": 0.2
+    },
+    "category_macro_f1": {
+      "baseline": 0.6733,
+      "optimized": 0.8629,
+      "delta": 0.1896
+    },
+    "priority_accuracy": {
+      "baseline": 0.5333,
+      "optimized": 0.5333,
+      "delta": 0.0
+    },
+    "priority_macro_precision": {
+      "baseline": 0.4015,
+      "optimized": 0.3667,
+      "delta": -0.0348
+    },
+    "priority_macro_recall": {
+      "baseline": 0.5333,
+      "optimized": 0.5333,
+      "delta": 0.0
+    },
+    "priority_macro_f1": {
+      "baseline": 0.4306,
+      "optimized": 0.4222,
+      "delta": -0.0084
+    },
+    "order_id_present_only_accuracy": {
+      "baseline": 1.0,
+      "optimized": 0.5714,
+      "delta": -0.4286
+    },
+    "order_id_null_specificity": {
+      "baseline": 0.75,
+      "optimized": 1.0,
+      "delta": 0.25
+    },
+    "order_id_entity_precision": {
+      "baseline": 0.7778,
+      "optimized": 1.0,
+      "delta": 0.2222
+    },
+    "order_id_entity_recall": {
+      "baseline": 1.0,
+      "optimized": 0.5714,
+      "delta": -0.4286
+    },
+    "order_id_entity_f1": {
+      "baseline": 0.875,
+      "optimized": 0.7273,
+      "delta": -0.1477
+    },
+    "total_runtime_sec": {
+      "baseline": 107.465,
+      "optimized": 122.381,
+      "delta": 14.916
+    },
+    "avg_latency_per_ticket_sec": {
+      "baseline": 7.164,
+      "optimized": 8.159,
+      "delta": 0.995
+    }
+  },
+  "baseline_test_metrics": {
+    "total_samples": 15,
+    "exact_match_count": 3,
+    "exact_match_accuracy": 0.2,
+    "category_metrics": {
+      "accuracy": 0.6667,
+      "macro_precision": 0.819,
+      "macro_recall": 0.6667,
+      "macro_f1": 0.6733,
+      "per_class": {
+        "Shipping": {
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "support": 3
+        },
+        "Refund": {
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "support": 3
+        },
+        "Payment": {
+          "precision": 1.0,
+          "recall": 0.3333,
+          "f1": 0.5,
+          "support": 3
+        },
+        "Technical": {
+          "precision": 0.4286,
+          "recall": 1.0,
+          "f1": 0.6,
+          "support": 3
+        },
+        "Other": {
+          "precision": 0.6667,
+          "recall": 0.6667,
+          "f1": 0.6667,
+          "support": 3
+        }
+      }
+    },
+    "priority_metrics": {
+      "accuracy": 0.5333,
+      "macro_precision": 0.4015,
+      "macro_recall": 0.5333,
+      "macro_f1": 0.4306,
+      "per_class": {
+        "High": {
+          "precision": 0.75,
+          "recall": 0.6,
+          "f1": 0.6667,
+          "support": 5
+        },
+        "Medium": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 5
+        },
+        "Low": {
+          "precision": 0.4545,
+          "recall": 1.0,
+          "f1": 0.625,
+          "support": 5
+        }
+      }
+    },
+    "order_id_metrics": {
+      "overall_accuracy": 0.8667,
+      "present_only_count": 7,
+      "present_only_exact_matches": 7,
+      "present_only_accuracy": 1.0,
+      "null_only_count": 8,
+      "null_only_specificity": 0.75,
+      "entity_precision": 0.7778,
+      "entity_recall": 1.0,
+      "entity_f1": 0.875
+    },
+    "runtime_sec": 107.465,
+    "avg_latency_per_ticket_sec": 7.164
+  },
+  "optimized_test_metrics": {
+    "total_samples": 15,
+    "exact_match_count": 7,
+    "exact_match_accuracy": 0.4667,
+    "category_metrics": {
+      "accuracy": 0.8667,
+      "macro_precision": 0.9,
+      "macro_recall": 0.8667,
+      "macro_f1": 0.8629,
+      "per_class": {
+        "Shipping": {
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "support": 3
+        },
+        "Refund": {
+          "precision": 1.0,
+          "recall": 0.6667,
+          "f1": 0.8,
+          "support": 3
+        },
+        "Payment": {
+          "precision": 1.0,
+          "recall": 1.0,
+          "f1": 1.0,
+          "support": 3
+        },
+        "Technical": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.8571,
+          "support": 3
+        },
+        "Other": {
+          "precision": 0.75,
+          "recall": 1.0,
+          "f1": 0.8571,
+          "support": 3
+        }
+      }
+    },
+    "priority_metrics": {
+      "accuracy": 0.5333,
+      "macro_precision": 0.3667,
+      "macro_recall": 0.5333,
+      "macro_f1": 0.4222,
+      "per_class": {
+        "High": {
+          "precision": 0.6,
+          "recall": 0.6,
+          "f1": 0.6,
+          "support": 5
+        },
+        "Medium": {
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 5
+        },
+        "Low": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "f1": 0.6667,
+          "support": 5
+        }
+      }
+    },
+    "order_id_metrics": {
+      "overall_accuracy": 0.8,
+      "present_only_count": 7,
+      "present_only_exact_matches": 4,
+      "present_only_accuracy": 0.5714,
+      "null_only_count": 8,
+      "null_only_specificity": 1.0,
+      "entity_precision": 1.0,
+      "entity_recall": 0.5714,
+      "entity_f1": 0.7273
+    },
+    "runtime_sec": 122.381,
+    "avg_latency_per_ticket_sec": 8.159
+  },
+  "optimized_test_predictions": [
+    {
+      "id": "TKT-049",
+      "ticket_text": "I suspect someone compromised my account and changed my registered email address. Please lock my profile immediately for security!",
+      "true_category": "Other",
+      "pred_category": "Other",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "High",
+      "pred_priority": "High",
+      "latency_sec": 27.206,
+      "error": null
+    },
+    {
+      "id": "TKT-009",
+      "ticket_text": "Do you offer international shipping to Canada and Tunisia for standard electronics orders?",
+      "true_category": "Shipping",
+      "pred_category": "Shipping",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "Low",
+      "pred_priority": "Low",
+      "latency_sec": 6.307,
+      "error": null
+    },
+    {
+      "id": "TKT-039",
+      "ticket_text": "Two-factor authentication SMS codes are not arriving at all, so I am completely locked out of my account.",
+      "true_category": "Technical",
+      "pred_category": "Technical",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "High",
+      "pred_priority": "Low",
+      "latency_sec": 6.605,
+      "error": null
+    },
+    {
+      "id": "TKT-033",
+      "ticket_text": "Do you accept Apple Pay, Google Pay, or bank wire transfers for online purchases?",
+      "true_category": "Payment",
+      "pred_category": "Payment",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "Low",
+      "pred_priority": "Low",
+      "latency_sec": 6.587,
+      "error": null
+    },
+    {
+      "id": "TKT-020",
+      "ticket_text": "Please cancel order ORD-2008 before dispatch and refund the full purchase amount to my PayPal account.",
+      "true_category": "Refund",
+      "pred_category": "Refund",
+      "true_order_id": "ORD-2008",
+      "pred_order_id": "ORD-2008",
+      "true_priority": "Medium",
+      "pred_priority": "High",
+      "latency_sec": 8.424,
+      "error": null
+    },
+    {
+      "id": "TKT-053",
+      "ticket_text": "How can our company apply to become an authorized wholesale distributor for your brand?",
+      "true_category": "Other",
+      "pred_category": "Other",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "Medium",
+      "pred_priority": "Low",
+      "latency_sec": 6.394,
+      "error": null
+    },
+    {
+      "id": "TKT-058",
+      "ticket_text": "What are your customer service opening hours during public holidays?",
+      "true_category": "Other",
+      "pred_category": "Other",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "Low",
+      "pred_priority": "Low",
+      "latency_sec": 6.256,
+      "error": null
+    },
+    {
+      "id": "TKT-045",
+      "ticket_text": "Dark mode text on the settings page has slightly low contrast on Safari.",
+      "true_category": "Technical",
+      "pred_category": "Technical",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "Low",
+      "pred_priority": "Low",
+      "latency_sec": 6.449,
+      "error": null
+    },
+    {
+      "id": "TKT-016",
+      "ticket_text": "My return request for order ORD-2004 was wrongly rejected even though the item is unopened. Please escalate my refund immediately.",
+      "true_category": "Refund",
+      "pred_category": "Refund",
+      "true_order_id": "ORD-2004",
+      "pred_order_id": "ORD-2004",
+      "true_priority": "High",
+      "pred_priority": "High",
+      "latency_sec": 7.522,
+      "error": null
+    },
+    {
+      "id": "TKT-023",
+      "ticket_text": "Are original shipping costs refundable if I decide to return an unwanted item?",
+      "true_category": "Refund",
+      "pred_category": "Other",
+      "true_order_id": null,
+      "pred_order_id": null,
+      "true_priority": "Low",
+      "pred_priority": "Low",
+      "latency_sec": 6.282,
+      "error": null
+    },
+    {
+      "id": "TKT-043",
+      "ticket_text": "I cannot download the firmware zip file included with my hardware purchase in order ORD-4007; the download stops at 50%.",
+      "true_category": "Technical",
+      "pred_category": "Technical",
+      "true_order_id": "ORD-4007",
+      "pred_order_id": null,
+      "true_priority": "Medium",
+      "pred_priority": "Low",
+      "latency_sec": 6.555,
+      "error": null
+    },
+    {
+      "id": "TKT-029",
+      "ticket_text": "My Visa card keeps getting declined at checkout with error code 402 when I try to pay for order ORD-3005.",
+      "true_category": "Payment",
+      "pred_category": "Payment",
+      "true_order_id": "ORD-3005",
+      "pred_order_id": "ORD-3005",
+      "true_priority": "Medium",
+      "pred_priority": "High",
+      "latency_sec": 7.601,
+      "error": null
+    },
+    {
+      "id": "TKT-005",
+      "ticket_text": "Can you check why the tracking status for order ORD-1005 has not updated since leaving the sorting facility three days ago?",
+      "true_category": "Shipping",
+      "pred_category": "Technical",
+      "true_order_id": "ORD-1005",
+      "pred_order_id": null,
+      "true_priority": "Medium",
+      "pred_priority": "Low",
+      "latency_sec": 6.514,
+      "error": null
+    },
+    {
+      "id": "TKT-002",
+      "ticket_text": "Order ORD-1002 is stuck in customs clearance for 10 days and I need these presentation materials before tomorrow morning's conference.",
+      "true_category": "Shipping",
+      "pred_category": "Shipping",
+      "true_order_id": "ORD-1002",
+      "pred_order_id": null,
+      "true_priority": "High",
+      "pred_priority": "Low",
+      "latency_sec": 6.628,
+      "error": null
+    },
+    {
+      "id": "TKT-028",
+      "ticket_text": "Our corporate procurement payment for order ORD-3004 is blocked at gateway verification and the supplier deadline expires in one hour.",
+      "true_category": "Payment",
+      "pred_category": "Payment",
+      "true_order_id": "ORD-3004",
+      "pred_order_id": "ORD-3004",
+      "true_priority": "High",
+      "pred_priority": "High",
+      "latency_sec": 7.041,
+      "error": null
+    }
+  ]
+}
