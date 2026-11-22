@@ -1,337 +1,212 @@
-﻿
-# Smart Customer Support — AI Ticket Classifier (Stanford DSPy)
+# DSPy Smart Ticket Classifier
 
+A local customer-support ticket classifier built with **Stanford DSPy**, **Ollama**, **Qwen 2.5 1.5B**, **Pydantic**, and **Streamlit**.
 
+**Course:** DS1 – Project 10: *Declarative Self-Optimizing Language Programs with Stanford DSPy (MIPROv2)*  
+**Institution:** ISG Tunis · **Academic year:** 2026–2027
 
-**Academic Module:** AI Engineering and Software Architecture in the Era of AI and AI Agents (DS1 — Project 10)  
+## 1. Project Objective
 
-**Institution:** Institut Supérieur de Gestion de Tunis (ISG Tunis) — 2026–2027  
+Classify a customer-support message and extract its order ID into a structured result:
 
+| Field | Values |
+|---|---|
+| Category | `Shipping`, `Refund`, `Payment`, `Technical`, `Other` |
+| Order ID | `ORD-XXXX` when present; otherwise `null` |
+| Priority | `High`, `Medium`, `Low` |
 
+The language model runs locally through Ollama. DSPy defines the prediction program and its optimization experiments; Pydantic validates the application's input and output.
 
----
-
-
-
-## 1. Project Overview
-
-
-
-This project implements a declarative, self-optimizing customer support ticket classification prototype using **Stanford DSPy** paired with a local **Ollama (`qwen2.5:1.5b`)** language model, strict **Pydantic v2** schema contracts, and an interactive **Streamlit** web interface.
-
-
-
-Given an unstructured customer message, the system extracts and validates three structured fields:
-
-- **`category`**: `Shipping` | `Refund` | `Payment` | `Technical` | `Other`
-
-- **`order_id`**: Explicit order identifier matching `^ORD-\d{4}$` or `null` (`None`)
-
-- **`priority`**: `High` | `Medium` | `Low`
-
-
-
----
-
-
-
-## 2. System Architecture & Output Sanitization
-
-
+## 2. Architecture
 
 ```text
-
-[Streamlit Web UI (src/app.py)]
-
-        │
-
-        ▼  TicketRequest (Pydantic v2 Strict Input Validation)
-
-[DSPy Integration Adapter (src/dspy_adapter.py)]
-
-        │
-
-        ▼  Compiled ChainOfThought Artifact (artifacts/optimized_ticket_classifier.json)
-
-[Local LLM Runtime: Ollama — qwen2.5:1.5b]
-
-        │
-
-        ▼  Deterministic Sanitizer + TicketResult (Pydantic v2 Output Gate)
-
-[Structured Output & Error Handling Display]
-
+Customer Ticket
+      |
+      v
+Streamlit Interface
+      |
+      v
+Pydantic Input Validation
+      |
+      v
+DSPy Adapter
+      |
+      v
+Compiled DSPy ChainOfThought Program
+      |
+      v
+Ollama – Qwen 2.5 1.5B
+      |
+      v
+Output Normalization
+      |
+      v
+Pydantic Output Validation
+      |
+      v
+Category + Order ID + Priority
 ```
 
+## 3. DSPy Implementation
 
+- **Signature:** `TicketClassificationSignature` defines the ticket input and the three prediction fields.
+- **Module:** `TicketClassifierModule` uses `dspy.ChainOfThought` to produce the structured prediction.
+- **Baseline:** zero-shot DSPy prediction.
+- **Optimization experiments:** `dspy.LabeledFewShot`, `dspy.BootstrapFewShot`, and `dspy.MIPROv2`.
+- **Primary artifact:** `ClassBalanced_FewShot_5`, selected using the Validation Set and saved as `artifacts/optimized_ticket_classifier.json`.
 
-### Defensive Output Sanitization (`src/dspy_adapter.py`)
+The selected artifact uses five balanced labeled demonstrations. `BootstrapFewShot` and `MIPROv2` were also executed and their results were retained as comparison experiments. The primary artifact is **not** a BootstrapFewShot or MIPROv2 artifact.
 
-Before passing raw LLM predictions to the strict `Pydantic v2` output contract (`TicketResult`), `src/dspy_adapter.py` applies deterministic normalization:
+## 4. Dataset and Evaluation
 
-- Any unrecognized `category` falls back to `"Other"`.
+The prepared dataset contains **60 synthetic tickets**, balanced across five categories and three priority levels.
 
-- Any unrecognized `priority` falls back to `"Medium"`.
+| Split | Samples | Purpose |
+|---|---:|---|
+| Train | 30 | Labeled examples for program/optimizer development |
+| Validation | 15 | Compare candidates and select the primary configuration |
+| Test | 15 | Held-out Before/After evaluation |
 
-- Any `order_id` string that does not match `^ORD-\d{4}$` is normalized to `None`.
+The Validation Set is used for candidate selection. The Test Set is reserved for the final comparison.
 
+### Evaluation metrics
 
+- Exact Match Accuracy
+- Category Accuracy and Macro-F1
+- Priority Accuracy and Macro-F1
+- Order ID entity Precision, Recall, and F1
+- Order ID null specificity
+- Runtime and average latency
 
-*Engineering note:* This defensive layer guarantees runtime stability and prevents malformed LLM strings from crashing the UI, though it masks raw format deviations rather than exposing them as validation failures.
+## 5. Optimization Ablation — Validation Set
 
+Recorded results from the project's optimization reports:
 
+| Candidate | Method | Exact Match | Category Accuracy | Compile time |
+|---|---|---:|---:|---:|
+| Baseline | Zero-shot | 13.33% | 33.33% | 0.000 s |
+| **ClassBalanced_FewShot_5 — Selected** | `LabeledFewShot` | **33.33%** | **73.33%** | **0.003 s** |
+| BootstrapFewShot_Stratified15 | `BootstrapFewShot` | 26.67% | 60.00% | 151.938 s |
+| MIPROv2_Light | `MIPROv2` | 33.33% | 66.67% | 820.357 s |
 
----
+The selection is based on the Validation Set composite score recorded by `src/optimize_dspy.py`:
 
+| Candidate | Validation composite |
+|---|---:|
+| ClassBalanced_FewShot_5 | **0.5064** |
+| BootstrapFewShot_Stratified15 | 0.4868 |
 
+`ClassBalanced_FewShot_5` was retained because it achieved the higher recorded composite score and category accuracy in this validation comparison. MIPROv2 is documented separately as an ablation experiment; it did not replace the primary artifact.
 
-## 3. Repository Structure
+## 6. Before/After Results — Held-Out Test Set
 
+The following results are from the recorded evaluation of **15 test tickets**.
 
+| Metric | Zero-shot baseline | Selected artifact |
+|---|---:|---:|
+| Exact Match Accuracy | 20.00% | **46.67%** |
+| Category Accuracy | 66.67% | **86.67%** |
+| Category Macro-F1 | 0.6733 | **0.8629** |
+| Priority Accuracy | 53.33% | 53.33% |
+| Priority Macro-F1 | 0.4306 | 0.4222 |
+| Order ID Precision | 77.78% | **100.00%** |
+| Order ID Recall | 100.00% | 57.14% |
+| Order ID F1 | 0.8750 | 0.7273 |
+| Order ID Null Specificity | 75.00% | **100.00%** |
+| Average latency / ticket | 7.164 s | 8.159 s |
+
+**Zero hallucination on missing Order IDs (in this test set):** the selected artifact achieved **100.00% Order ID Null Specificity (8/8)**, correctly returning `null` for all eight test tickets that did not contain an order ID. This result is limited to the evaluated test examples and does not imply that the model can never hallucinate an order ID.
+
+Category classification and exact match improved in this run. Priority accuracy did not improve, and Order ID recall decreased. Therefore, the results do **not** show improvement on every metric.
+
+## 7. Main Project Files
 
 ```text
-
-DSPy_Project/
-
-├── artifacts/
-
-│   └── optimized_ticket_classifier.json   # Compiled DSPy ChainOfThought artifact (ClassBalanced_FewShot_5)
-
-├── data/
-
-│   ├── raw_tickets.json                   # Initial synthetic ticket dataset (60 tickets)
-
-│   ├── clean_tickets.json                 # Deduplicated, validated, class-balanced dataset (60 tickets)
-
-│   ├── dataset_quality_report.json        # Automated data quality & balance audit report
-
-│   ├── train.json                         # Stratified training split (30 tickets — 50%)
-
-│   ├── validation.json                    # Stratified validation split (15 tickets — 25%)
-
-│   ├── test.json                          # Held-out test split (15 tickets — 25%)
-
-│   └── split_report.json                  # Split distribution & leakage check report
-
-├── results/
-
-│   ├── baseline_results.json              # Zero-shot baseline evaluation metrics
-
-│   ├── optimization_report.json           # LabeledFewShot vs. BootstrapFewShot selection log
-
-│   ├── miprov2_ablation_report.json       # MIPROv2 + Optuna ablation benchmark
-
-│   └── before_after_comparison.json       # Held-out Test Set comparison (Before vs. After)
-
-├── src/
-
-│   ├── app.py                             # Streamlit interactive web application (Live DSPy Mode)
-
-│   ├── schemas.py                         # Strict Pydantic v2 input/output contracts
-
-│   ├── dspy_adapter.py                    # Production inference wrapper & deterministic sanitizer
-
-│   ├── signatures.py                      # Declarative dspy.Signature definition
-
-│   ├── modules.py                         # Composable dspy.ChainOfThought module & Ollama LM setup
-
-│   ├── metrics.py                         # Exact-match, Macro-F1 & Order-ID entity evaluators
-
-│   ├── create_raw_dataset.py              # Reproducible raw dataset generator
-
-│   ├── validate_and_prepare_dataset.py    # Data cleaning & quality verification pipeline
-
-│   ├── split_dataset.py                   # Stratified Train/Validation/Test splitter
-
-│   ├── run_baseline.py                    # Zero-shot baseline runner
-
-│   ├── optimize_dspy.py                   # Teleprompter comparison & artifact serializer
-
-│   ├── run_miprov2_ablation.py            # MIPROv2 Bayesian optimization ablation study
-
-│   ├── compare_before_after.py            # Deterministic Before vs. After test evaluator
-
-│   ├── mock_classifier.py                 # Initial mock stub used during UI prototyping
-
-│   └── test_schemas.py                    # Automated unit & Streamlit AppTest suite (21 tests)
-
-├── README.md                              # Unified project documentation
-
-└── requirements.txt                       # Pinned Python dependencies
-
+artifacts/
+  optimized_ticket_classifier.json
+data/
+  raw_tickets.json
+  clean_tickets.json
+  train.json
+  validation.json
+  test.json
+results/
+  optimization_report.json
+  miprov2_ablation_report.json
+  before_after_comparison.json
+src/
+  signatures.py
+  modules.py
+  metrics.py
+  dspy_adapter.py
+  optimize_dspy.py
+  run_miprov2_ablation.py
+  compare_before_after.py
+  app.py
+  schemas.py
+  test_schemas.py
 ```
 
+## 8. Setup and Run
 
+### Requirements
 
----
+- Python 3.11
+- Ollama
+- `qwen2.5:1.5b`
+- Dependencies listed in `requirements.txt`
 
-
-
-## 4. Installation & Environment Setup (Windows PowerShell)
-
-
-
-### Prerequisites
-
-1. **Python 3.11+**
-
-2. **Ollama** installed locally with the `qwen2.5:1.5b` model pulled:
-
-   ```powershell
-
-   ollama pull qwen2.5:1.5b
-
-   ```
-
-
-
-### Setup Steps
+Download the model once:
 
 ```powershell
+ollama pull qwen2.5:1.5b
+```
 
-# 1. Navigate to the cloned/extracted repository root (e.g., DSPy_Project or DSPy-Smart-Ticket-Classifier)
+Create the environment and install dependencies from the repository root:
 
-cd <repository-folder>
-
-
-
-# 2. Create and activate a virtual environment
-
+```powershell
 python -m venv .venv
-
 .\.venv\Scripts\Activate.ps1
-
-
-
-# 3. Install dependencies
-
-pip install -r requirements.txt
-
+python -m pip install -r requirements.txt
 ```
 
-
-
----
-
-
-
-## 5. Running the Application & Verification Suite
-
-
-
-### A. Run the Automated Test Suite (21 Unit & UI Contract Tests)
+Start the application:
 
 ```powershell
-
-python -m unittest discover -s src -p "test_*.py" -v
-
+streamlit run src/app.py
 ```
 
+Open the local URL printed by Streamlit, usually `http://localhost:8501`.
 
+## 9. Reproduce Evaluation and Tests
 
-### B. Launch the Interactive Streamlit Web App
-
-Ensure Ollama is running in the background, then start the UI:
-
-```powershell
-
-streamlit run src\app.py
-
-```
-
-Open `http://localhost:8501` in your browser to classify customer tickets in real time.
-
-
-
-### C. Reproduce the DSPy Compilation & Benchmark Pipeline (Optional)
+Run the recorded evaluation script:
 
 ```powershell
-
-python -m src.validate_and_prepare_dataset
-
-python -m src.split_dataset
-
-python -m src.run_baseline
-
-python -m src.optimize_dspy
-
-python -m src.run_miprov2_ablation
-
 python -m src.compare_before_after
-
 ```
 
+Run the unit and interface tests:
 
+```powershell
+python -m unittest discover -s src -p "test_*.py" -v
+```
 
----
+The captured test run completed **21 tests in 5.043 seconds** with `OK`. Streamlit emitted `missing ScriptRunContext` warnings during bare-mode UI tests; the captured run still passed.
 
+Optimizer compilation can take substantially longer than normal inference, especially MIPROv2. The JSON reports in `results/` preserve the recorded experiment results; rerunning experiments may produce different timings and metrics.
 
+## 10. Scope and Limitations
 
-## 6. Evaluation Results & Optimization Analysis
+- The dataset is synthetic and small (60 tickets; 15 test examples).
+- The local model may produce classification or extraction errors.
+- The selected configuration improves some test metrics but reduces Order ID recall and does not improve every metric.
+- This is an academic prototype, not a production-ready support automation system.
 
+## References
 
-
-### A. Held-Out Test Set Comparison (`results/before_after_comparison.json` — 15 Tickets)
-
-
-
-| Metric | Zero-Shot Baseline | Compiled DSPy (`ClassBalanced_FewShot_5`) | Delta |
-
-| :--- | :---: | :---: | :---: |
-
-| **Exact Match Accuracy** | `20.00%` (3/15) | **`46.67%`** (7/15) | **`+26.67%`** |
-
-| **Category Accuracy** | `66.67%` (10/15) | **`86.67%`** (13/15) | **`+20.00%`** |
-
-| **Category Macro-F1** | `0.6733` | **`0.8629`** | **`+0.1896`** |
-
-| **Priority Accuracy** | `53.33%` (8/15) | `53.33%` (8/15) | `0.00%` |
-
-| **Priority Macro-F1** | `0.4306` | `0.4222` | `-0.0084` |
-
-| **Order ID Entity Precision** | `77.78%` | **`100.00%`** | **`+22.22%`** |
-
-| **Order ID Entity Recall** | `100.00%` | `57.14%` | `-42.86%` |
-
-| **Order ID Entity F1** | `0.8750` | `0.7273` | `-0.1477` |
-
-| **Order ID Null Specificity** | `75.00%` | **`100.00%`** | **`+25.00%`** |
-
-| **Avg Latency / Ticket** | `7.164s` | `8.159s` | `+0.995s` |
-
-
-
-### B. Empirical Findings & Trade-Offs
-
-1. **Substantial Gains in Primary Classification:** Compilation more than doubled end-to-end **Exact Match Accuracy** (`+26.67%`) and raised **Category Accuracy** to `86.67%` (`Macro-F1 = 0.8629`).
-
-2. **Precision-vs-Recall Trade-off on `Order ID`:** Eliminated false-positive order IDs completely (`100.00%` Precision and `100.00%` Null Specificity), at the cost of lower recall (`57.14%`) on explicit IDs due to the compact `1.5B` parameter capacity.
-
-3. **Priority Bottleneck:** Subjective urgency estimation (`High` / `Medium` / `Low`) remained unchanged at `53.33%`, indicating a natural boundary for a `1.5B` local model without domain-specific urgency rubrics.
-
-4. **Prototype Scope:** The 15-ticket held-out test set provides a controlled educational benchmark rather than a large-scale production statistical guarantee.
-
-
-
-### C. Teleprompter Comparison & `MIPROv2` Ablation (`Validation Set` — 15 Tickets)
-
-`src/optimize_dspy.py` systematically compares **`LabeledFewShot` (`ClassBalanced_FewShot_5`)** and **`BootstrapFewShot` (`BootstrapFewShot_Stratified15`)** on the validation split and serializes the highest-scoring candidate (`ClassBalanced_FewShot_5`) to `artifacts/optimized_ticket_classifier.json`. In addition, `src/run_miprov2_ablation.py` benchmarks **`MIPROv2_Light`** (`results/miprov2_ablation_report.json`):
-
-
-
-| Strategy / Teleprompter | Underlying Optimizer | Val Composite | Val Exact Match | Val Category Acc | Val Order F1 | Compile Time | Active Demos |
-
-| :--- | :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-
-| `Baseline (Zero-Shot)` | None | — | `13.33%` | `33.33%` | `0.8421` | `0.000s` | `0` |
-
-| **`ClassBalanced_FewShot_5` (Selected)** | `dspy.LabeledFewShot` | **`0.5064`** | **`33.33%`** | **`73.33%`** | `0.5455` | **`0.003s`** | `5` |
-
-| `BootstrapFewShot_Stratified15` | `dspy.BootstrapFewShot` | `0.4868` | `26.67%` | `60.00%` | `0.8571` | `151.938s` | `5` |
-
-| `MIPROv2_Light` (Ablation) | `dspy.MIPROv2` (3 Optuna trials) | — | `33.33%` | `66.67%` | `0.8889` | `820.357s` | `0` |
-
-
-
-**Why `ClassBalanced_FewShot_5` was selected:** On a CPU-bound environment (`Intel Core i3`, `8 GB RAM`, `qwen2.5:1.5b`), `ClassBalanced_FewShot_5` achieved the highest validation composite score (`0.5064`) and category accuracy (`73.33%`) in `0.003s`. `BootstrapFewShot` and `MIPROv2` are preserved as documented ablation experiments showing that while bootstrapped reasoning traces improve `order_id` extraction, they degrade category accuracy and require heavy compilation times (`2.5 min` and `13.7 min`, respectively) on CPU hardware.
-
+- [Stanford DSPy Documentation](https://dspy.ai/)
+- [Stanford DSPy GitHub](https://github.com/stanfordnlp/dspy)
+- [Ollama](https://ollama.com/)
+- [Pydantic Documentation](https://docs.pydantic.dev/)
+- [Streamlit Documentation](https://docs.streamlit.io/)
