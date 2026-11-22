@@ -119,33 +119,60 @@ The following results are from the recorded evaluation of **15 test tickets**.
 
 Category classification and exact match improved in this run. Priority accuracy did not improve, and Order ID recall decreased. Therefore, the results do **not** show improvement on every metric.
 
-## 7. Main Project Files
+## 7. Project Structure
 
 ```text
-artifacts/
-  optimized_ticket_classifier.json
-data/
-  raw_tickets.json
-  clean_tickets.json
-  train.json
-  validation.json
-  test.json
-results/
-  optimization_report.json
-  miprov2_ablation_report.json
-  before_after_comparison.json
-src/
-  signatures.py
-  modules.py
-  metrics.py
-  dspy_adapter.py
-  optimize_dspy.py
-  run_miprov2_ablation.py
-  compare_before_after.py
-  app.py
-  schemas.py
-  test_schemas.py
+DSPy-Smart-Ticket-Classifier/
+├── .gitignore
+├── README.md
+├── requirements.txt
+│
+├── artifacts/                         # Serialized DSPy classifier artifact
+│   └── optimized_ticket_classifier.json
+│
+├── data/                              # Dataset files and preparation reports
+│   ├── raw_tickets.json
+│   ├── clean_tickets.json
+│   ├── dataset_quality_report.json
+│   ├── split_report.json
+│   ├── train.json
+│   ├── validation.json
+│   └── test.json
+│
+├── results/                           # Recorded evaluation and optimization results
+│   ├── baseline_results.json
+│   ├── before_after_comparison.json
+│   ├── optimization_report.json
+│   └── miprov2_ablation_report.json
+│
+└── src/                               # Application, DSPy pipeline, data tools, and tests
+    ├── app.py
+    ├── schemas.py
+    ├── signatures.py
+    ├── modules.py
+    ├── dspy_adapter.py
+    ├── metrics.py
+    ├── mock_classifier.py
+    ├── create_raw_dataset.py
+    ├── validate_and_prepare_dataset.py
+    ├── split_dataset.py
+    ├── run_baseline.py
+    ├── optimize_dspy.py
+    ├── run_miprov2_ablation.py
+    ├── compare_before_after.py
+    └── test_schemas.py
 ```
+
+### Directory Overview
+
+| Path | Purpose |
+|---|---|
+| `artifacts/` | Saved, optimized DSPy program used by the application. |
+| `data/` | Raw and prepared ticket datasets, train/validation/test splits, and dataset reports. |
+| `results/` | Baseline, optimizer ablation, and held-out Before/After evaluation reports. |
+| `src/` | Streamlit application, Pydantic schemas, DSPy signatures/modules, adapter, metrics, dataset preparation scripts, optimization scripts, and tests. |
+| `requirements.txt` | Python dependencies required by the project. |
+| `.gitignore` | Files and directories excluded from Git tracking. |
 
 ## 8. Setup and Run
 
